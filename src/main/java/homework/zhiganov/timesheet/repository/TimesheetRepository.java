@@ -1,5 +1,6 @@
 package homework.zhiganov.timesheet.repository;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import org.springframework.stereotype.*;
@@ -14,7 +15,7 @@ public class TimesheetRepository {
 
 
     public Optional<Timesheet> getbyId(Long id){
-        //select * from timesheets where id = $id
+        //select * from timesheets where id = 
         // Timesheet ts = new Timesheet(1L, "spring", 73, LocalDate.now());
         // this.timesheets.add(ts);
       return  timesheets.stream().filter(it-> Objects.equals(it.getId(), id))
@@ -43,11 +44,14 @@ public class TimesheetRepository {
     }
 
     public List<Timesheet> getByProjectId(Long id){
-        //select * from timesheets where id = $id
+        //select * from timesheets where id = 
         // Timesheet ts = new Timesheet(1L, "spring", 73, LocalDate.now());
         // this.timesheets.add(ts);
       //return List.copyOf(timesheets.stream().filter(it-> Objects.equals(it.getProjectId(), id)));
       return timesheets.stream().filter(it-> Objects.equals(it.getProjectId(), id)).toList();
     }
+
+
+
 
 }

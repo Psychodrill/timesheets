@@ -49,4 +49,8 @@ public class TimesheetService {
 
     }
 
+    public List<Timesheet>findAll() {
+        return tsRepository.getAll();
+    }
+
 }
