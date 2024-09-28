@@ -46,7 +46,10 @@ public class TimesheetController {
 
     @PostMapping
     public ResponseEntity<Timesheet> create(@RequestBody Timesheet timesheet){
-    service.create(timesheet);
+        Timesheet ts =service.create(timesheet);
+        if(ts==null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(timesheet);
+        }
         
         return ResponseEntity.status(HttpStatus.CREATED).body(timesheet);
     }

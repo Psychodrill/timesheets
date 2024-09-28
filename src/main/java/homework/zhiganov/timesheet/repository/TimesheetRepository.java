@@ -15,6 +15,8 @@ public class TimesheetRepository {
 
     public Optional<Timesheet> getbyId(Long id){
         //select * from timesheets where id = $id
+        // Timesheet ts = new Timesheet(1L, "spring", 73, LocalDate.now());
+        // this.timesheets.add(ts);
       return  timesheets.stream().filter(it-> Objects.equals(it.getId(), id))
         .findFirst();
 
@@ -38,6 +40,14 @@ public class TimesheetRepository {
         timesheets.stream().filter(it-> Objects.equals(it.getId(), id))
         .findFirst().ifPresent(timesheets::remove);
 
+    }
+
+    public List<Timesheet> getByProjectId(Long id){
+        //select * from timesheets where id = $id
+        // Timesheet ts = new Timesheet(1L, "spring", 73, LocalDate.now());
+        // this.timesheets.add(ts);
+      //return List.copyOf(timesheets.stream().filter(it-> Objects.equals(it.getProjectId(), id)));
+      return timesheets.stream().filter(it-> Objects.equals(it.getProjectId(), id)).toList();
     }
 
 }
