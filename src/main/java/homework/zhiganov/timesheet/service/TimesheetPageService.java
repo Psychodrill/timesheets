@@ -40,7 +40,7 @@ public class TimesheetPageService {
 
     }
     public List<TimesheetPageDTO> findAll() {
-
+        System.out.println(timesheetService.findAll().stream().map(this::convert).toList().size());
         return timesheetService.findAll().stream().map(this::convert).toList();
         //return new ArrayList<TimesheetPageDTO>();
     }

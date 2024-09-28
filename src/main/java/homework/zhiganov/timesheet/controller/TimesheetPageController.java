@@ -27,7 +27,7 @@ public class TimesheetPageController {
     @GetMapping
     public String getAllTimeSheets(Model model){
         List<TimesheetPageDTO> timesheets=service.findAll();
-        model.addAttribute("timesheet", timesheets);
+        model.addAttribute("timesheets", timesheets);
         return "timesheets-page.html";
     }
     
