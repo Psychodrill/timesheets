@@ -46,9 +46,18 @@ public class TimesheetController {
 
     @PostMapping
     public ResponseEntity<Timesheet> create(@RequestBody Timesheet timesheet){
-        Timesheet ts =service.create(timesheet);
-        if(ts==null){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(timesheet);
+        // Timesheet ts =service.create(timesheet);
+        // if(ts==null){
+        //     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(timesheet);
+        // }
+        final Timesheet created;
+
+        try{
+            created = service.create(timesheet);
+        }catch(IllegalArgumentException e){
+             return ResponseEntity.badRequest().build();
+        }catch(NoSuchElementException e){
+             return  ResponseEntity.notFound().build();
         }
         
         return ResponseEntity.status(HttpStatus.CREATED).body(timesheet);
@@ -64,6 +73,14 @@ public class TimesheetController {
     }
 
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<?> handleIllegalArgumentException(IllegalArgumentException e){
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
 
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<?> handlNoSuchElementException(IllegalArgumentException e){
+        return ResponseEntity.notFound().build();
+    }
 
 }

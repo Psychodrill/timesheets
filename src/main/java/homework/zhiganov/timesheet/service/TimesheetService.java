@@ -35,11 +35,19 @@ public class TimesheetService {
 
     public Timesheet create(Timesheet timesheet){
 
-        if(pRepository.getbyId(timesheet.getProjectId()).isPresent()){
-            timesheet.setCreatedAt(LocalDate.now());
-            return tsRepository.create(timesheet);
+        // if(pRepository.getbyId(timesheet.getProjectId()).isPresent()){
+        //     timesheet.setCreatedAt(LocalDate.now());
+        //     return tsRepository.create(timesheet);
+        // }
+        // return null;
+        if(Objects.isNull(timesheet.getProjectId())){
+            throw new IllegalArgumentException("projectId must not be null");
         }
-        return null;
+        if(pRepository.getbyId(timesheet.getProjectId()).isEmpty()){
+            throw new NoSuchElementException("Project with id" + timesheet.getProjectId() + "does not exists");
+        }
+        timesheet.setCreatedAt(LocalDate.now());
+        return tsRepository.create(timesheet);
 
     }
 
