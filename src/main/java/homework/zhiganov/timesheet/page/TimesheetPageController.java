@@ -1,4 +1,4 @@
-package homework.zhiganov.timesheet.controller;
+package homework.zhiganov.timesheet.page;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -38,8 +38,8 @@ public class TimesheetPageController {
         
         Optional<TimesheetPageDTO> timesheetOpt = service.getbyId(id);
         if(timesheetOpt.isEmpty()){
-            return "not-found.html";
-            //throw new NoSuchElementException();
+           // return "not-found.html";
+            throw new NoSuchElementException();
         }
 
 

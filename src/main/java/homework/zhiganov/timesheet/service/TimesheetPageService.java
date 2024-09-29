@@ -7,9 +7,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import homework.zhiganov.timesheet.controller.TimesheetPageDTO;
 import homework.zhiganov.timesheet.model.Project;
 import homework.zhiganov.timesheet.model.Timesheet;
+import homework.zhiganov.timesheet.page.TimesheetPageDTO;
 import lombok.RequiredArgsConstructor;
 
 @Service

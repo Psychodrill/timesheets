@@ -1,4 +1,4 @@
-package homework.zhiganov.timesheet.controller;
+package homework.zhiganov.timesheet.page;
 
 import lombok.Data;
 
