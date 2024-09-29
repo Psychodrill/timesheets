@@ -31,8 +31,10 @@ public class TimesheetPageService {
 
         TimesheetPageDTO timesheetPageDTO= new TimesheetPageDTO();
 
-        timesheetPageDTO.setProjectName(project.getName());
+        
         timesheetPageDTO.setId(String.valueOf(timesheet.getId()));
+        timesheetPageDTO.setProjectId(project.getId().toString());
+        timesheetPageDTO.setProjectName(project.getName());
         timesheetPageDTO.setMinutes(String.valueOf(timesheet.getMinutes()));
         timesheetPageDTO.setCreatedAt(timesheet.getCreatedAt().toString());
         return timesheetPageDTO;
@@ -40,7 +42,7 @@ public class TimesheetPageService {
 
     }
     public List<TimesheetPageDTO> findAll() {
-        System.out.println(timesheetService.findAll().stream().map(this::convert).toList().size());
+        //System.out.println(timesheetService.findAll().stream().map(this::convert).toList().size());
         return timesheetService.findAll().stream().map(this::convert).toList();
         //return new ArrayList<TimesheetPageDTO>();
     }
