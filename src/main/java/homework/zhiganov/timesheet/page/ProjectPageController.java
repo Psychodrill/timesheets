@@ -23,7 +23,7 @@ public class ProjectPageController {
 
     @GetMapping
     public String getAllProjects(Model model){
-         List<Project> projects=service.getAll();
+         List<Project> projects=service.findAll();
          model.addAttribute("projects", projects);
          return "projects-page.html";
     }
@@ -33,7 +33,7 @@ public class ProjectPageController {
     @GetMapping("/{id}")
     public String getProjectPage(@PathVariable Long id, Model model){
         
-        Optional<Project> projectOpt = service.getbyId(id);
+        Optional<Project> projectOpt = service.findById(id);
         if(projectOpt.isEmpty()){
            // return "not-found.html";
             throw new NoSuchElementException();

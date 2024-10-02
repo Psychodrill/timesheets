@@ -22,9 +22,10 @@ public class TimesheetApplication {
 		ProjectRepository projectRepo =ctx.getBean(ProjectRepository.class);
 		for(int i=1; i<=5; i++){
 			Project project = new Project();
-			project.setId((long)i);
+			//project.setId((long)i);
 			project.setName("Project #"+i);
-			projectRepo.create(project);
+			//projectRepo.create(project);
+			projectRepo.save(project);
 		}
 		TimesheetRepository tsr = ctx.getBean(TimesheetRepository.class);
 		LocalDate createdAt = LocalDate.now();
@@ -32,11 +33,11 @@ public class TimesheetApplication {
 
 			createdAt = createdAt.plusDays(1);
 			Timesheet timesheet = new Timesheet();
-			timesheet.setId((long)i);
+			//timesheet.setId((long)i);
 			timesheet.setProjectId(ThreadLocalRandom.current().nextLong(1,6));
 			timesheet.setCreatedAt(createdAt);
 			timesheet.setMinutes(ThreadLocalRandom.current().nextInt(100,1000));
-			tsr.create(timesheet);
+			tsr.save(timesheet);
 		}
 	}
 

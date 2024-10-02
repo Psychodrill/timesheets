@@ -21,13 +21,13 @@ public class TimesheetPageService {
     private final ProjectService projectService;
     public Optional<TimesheetPageDTO> getbyId(Long id){
 
-       return timesheetService.getbyId(id).map(this::convert);
+       return timesheetService.findById(id).map(this::convert);
 
     }
 
     private TimesheetPageDTO convert(Timesheet timesheet){
 
-        Project project =projectService.getbyId(timesheet.getProjectId()).orElseThrow();
+        Project project =projectService.findById(timesheet.getProjectId()).orElseThrow();
 
         TimesheetPageDTO timesheetPageDTO= new TimesheetPageDTO();
 

@@ -11,6 +11,8 @@ import org.springframework.stereotype.*;
 import homework.zhiganov.timesheet.model.*;
 
 import homework.zhiganov.timesheet.repository.*;
+import homework.zhiganov.timesheet.repository.ProjectRepository;
+import homework.zhiganov.timesheet.repository.TimesheetRepository;
 @Service
 public class TimesheetService {
 
@@ -22,14 +24,14 @@ public class TimesheetService {
         this.pRepository= pRepository;
     }
 
-    public Optional<Timesheet> getbyId(Long id){
-        return tsRepository.getbyId(id);
+    public Optional<Timesheet> findById(Long id){
+        return tsRepository.findById(id);
 
     }
 
 
-    public List<Timesheet>getAll(){
-        return tsRepository.getAll();
+    public List<Timesheet>findAll(){
+        return tsRepository.findAll();
     }
 
 
@@ -43,22 +45,22 @@ public class TimesheetService {
         if(Objects.isNull(timesheet.getProjectId())){
             throw new IllegalArgumentException("projectId must not be null");
         }
-        if(pRepository.getbyId(timesheet.getProjectId()).isEmpty()){
+        if(pRepository.findById(timesheet.getProjectId()).isEmpty()){
             throw new NoSuchElementException("Project with id" + timesheet.getProjectId() + "does not exists");
         }
         timesheet.setCreatedAt(LocalDate.now());
-        return tsRepository.create(timesheet);
+        return tsRepository.save(timesheet);
 
     }
 
 
     public void delete(Long id){
-        tsRepository.delete(id);
+        tsRepository.deleteById(id);
 
     }
 
-    public List<Timesheet>findAll() {
-        return tsRepository.getAll();
-    }
+    // public List<Timesheet>findAll() {
+    //     return tsRepository.getAll();
+    // }
 
 }

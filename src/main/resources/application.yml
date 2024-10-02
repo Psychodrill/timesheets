@@ -1,0 +1,9 @@
+#spring.application.name=timesheet
+spring:
+  application:
+    name: timesheet
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver

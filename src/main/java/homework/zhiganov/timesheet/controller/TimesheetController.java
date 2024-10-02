@@ -29,7 +29,7 @@ public class TimesheetController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Timesheet> getTimesheet(@PathVariable Long id){
-      Optional<Timesheet> ts =  service.getbyId(id);
+      Optional<Timesheet> ts =  service.findById(id);
         if(ts.isPresent()){
             //return ResponseEntity.ok().body(ts.get());
             return ResponseEntity.status(HttpStatus.OK).body(ts.get());
@@ -41,7 +41,7 @@ public class TimesheetController {
 
     @GetMapping
     public ResponseEntity<List<Timesheet>> getAll(){
-        return ResponseEntity.ok(service.getAll());
+        return ResponseEntity.ok(service.findAll());
     }
 
     @PostMapping

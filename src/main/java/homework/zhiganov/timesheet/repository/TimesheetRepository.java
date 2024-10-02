@@ -1,57 +1,32 @@
 package homework.zhiganov.timesheet.repository;
 
-import java.time.LocalDate;
-import java.util.*;
 
-import org.springframework.stereotype.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import homework.zhiganov.timesheet.model.Timesheet;
+import java.util.*;
+import java.time.*;
 
-@Repository
-public class TimesheetRepository {
-
-    private static Long sequence = 1L;
-    private final List<Timesheet> timesheets = new ArrayList<Timesheet>();
+public interface TimesheetRepository extends JpaRepository<Timesheet, Long>{
 
 
-    public Optional<Timesheet> getbyId(Long id){
-        //select * from timesheets where id = 
-        // Timesheet ts = new Timesheet(1L, "spring", 73, LocalDate.now());
-        // this.timesheets.add(ts);
-      return  timesheets.stream().filter(it-> Objects.equals(it.getId(), id))
-        .findFirst();
+     //select * from timesheet where ptoject_id= 1
+    //Note: сломается если в БД результат выдаёт больше одного значения
+   // Optional<Timesheet> findByProjectId(Long projectId);
+    //select * from timesheet where ptoject_id= 1
+    //order_by created_at desc
+    List<Timesheet> findByProjectIdOrderByCreatedAtDesc(Long projectId);
+    //select * from timesheet where project_id = 1 and minutes =2
+    List<Timesheet> findByProjectIdAndMinutes(Long projectId, Integer minutes);
+    //select * from timesheet where created_at > 1
+    List<Timesheet> findByCreatedAtGreaterThan(LocalDate localDate);
+    //select * from timesheet where projectId is null
+    List<Timesheet> findByProjectIdIsNull();
 
-    }
-
-
-    public List<Timesheet>getAll(){
-        return List.copyOf(timesheets);
-    }
-
-
-    public Timesheet create(Timesheet timesheet){
-        timesheet.setId(sequence++);
-        timesheets.add(timesheet);
-        
-        return timesheet;
-    }
-
-
-    public void delete(Long id){
-        timesheets.stream().filter(it-> Objects.equals(it.getId(), id))
-        .findFirst().ifPresent(timesheets::remove);
-
-    }
-
-    public List<Timesheet> getByProjectId(Long id){
-        //select * from timesheets where id = 
-        // Timesheet ts = new Timesheet(1L, "spring", 73, LocalDate.now());
-        // this.timesheets.add(ts);
-      //return List.copyOf(timesheets.stream().filter(it-> Objects.equals(it.getProjectId(), id)));
-      return timesheets.stream().filter(it-> Objects.equals(it.getProjectId(), id)).toList();
-    }
-
-
-
-
+    //select * from timesheet where ptoject_id= 1
+    //order_by created_at desc
+    //jql
+    @Query("select t from Timesheet t where t.projectId = :projectId order by t.createdAt desc")
+    List<Timesheet> findByProjId(Long projectId);
 }

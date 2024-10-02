@@ -26,7 +26,7 @@ public class ProjectController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Project> getProject(@PathVariable Long id){
-        Optional<Project> project =  pService.getbyId(id);
+        Optional<Project> project =  pService.findById(id);
         if(project.isPresent()){
             //return ResponseEntity.ok().body(ts.get());
             return ResponseEntity.status(HttpStatus.OK).body(project.get());
@@ -38,7 +38,7 @@ public class ProjectController {
 
     @GetMapping
     public ResponseEntity<List<Project>> getAll(){
-        return ResponseEntity.ok(pService.getAll());
+        return ResponseEntity.ok(pService.findAll());
     }
 
     @PostMapping

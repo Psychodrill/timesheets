@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import homework.zhiganov.timesheet.model.*;
 
 import homework.zhiganov.timesheet.repository.*;
+import homework.zhiganov.timesheet.repository.ProjectRepository;
+import homework.zhiganov.timesheet.repository.TimesheetRepository;
 
 
 @Service
@@ -21,29 +23,30 @@ public class ProjectService {
          this.tsRepository=tsRepository;
      }
 
-    public Optional<Project> getbyId(Long id){
-        return pRepository.getbyId(id);
+    public Optional<Project> findById(Long id){
+        return pRepository.findById(id);
 
     }
 
-    public List<Project>getAll(){
-        return pRepository.getAll();
+    public List<Project>findAll(){
+        return pRepository.findAll();
     }
 
 
     public Project create(Project project){
 
-        return pRepository.create(project);
+        return pRepository.save(project);
     }
 
 
     public void delete(Long id){
-        pRepository.delete(id);
+        pRepository.deleteById(id);
 
     }
 
     public List<Timesheet> getTimesheetsByProjectId(Long id){
-        return tsRepository.getByProjectId(id);
+        //throw new UnsupportedOperationException();
+        return tsRepository.findByProjId(id);
 
     }
 
