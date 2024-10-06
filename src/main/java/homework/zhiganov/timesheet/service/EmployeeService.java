@@ -54,4 +54,10 @@ public class EmployeeService {
 
     }
 
+    public List<Timesheet> findTimesheetsByEmployeeId(Long employeeId){
+        //throw new UnsupportedOperationException();
+        return tsRepository.findByEmployeeId(employeeId);
+
+    }
+
 }

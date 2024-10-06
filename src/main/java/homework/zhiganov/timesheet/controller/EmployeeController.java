@@ -66,4 +66,10 @@ public class EmployeeController {
         return ResponseEntity.ok(empService.findByEmploymentDateAfter(localDate));
     }
 
+    @GetMapping("/{id}/timesheets")
+    public ResponseEntity<List<Timesheet>> getTimesheetsByEmployee(@PathVariable Long employeeId){
+
+        return ResponseEntity.ok(empService.findTimesheetsByEmployeeId(employeeId));
+    }
+
 }

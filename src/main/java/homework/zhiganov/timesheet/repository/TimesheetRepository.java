@@ -47,4 +47,6 @@ public interface TimesheetRepository extends JpaRepository<Timesheet, Long>/*, N
     //         return findByCreatedAtLessThan(max);
     //     }
     // }
+
+    List<Timesheet> findByEmployeeId(Long employeeId);
 }

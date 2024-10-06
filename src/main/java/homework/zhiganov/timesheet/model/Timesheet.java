@@ -18,8 +18,10 @@ public class Timesheet {
     @EqualsAndHashCode.Include
     private Long id;
     private Long projectId;
+    private Long employeeId;
     private Integer minutes;
     private LocalDate createdAt;
+    
 
     // public Timesheet(Long id, String project, int minutes, LocalDate createdAt){
 
