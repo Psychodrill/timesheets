@@ -10,10 +10,17 @@ import org.springframework.web.bind.annotation.*;
 import homework.zhiganov.timesheet.model.Project;
 import homework.zhiganov.timesheet.model.Timesheet;
 import homework.zhiganov.timesheet.service.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 @RestController
 @RequestMapping("/projects")
+@Tag(name ="Projects", description = "API для работы с проектами")
 public class ProjectController {
 
     private final ProjectService pService;
@@ -24,8 +31,18 @@ public class ProjectController {
     this.tsService = tsService;
    }
 
+    @Operation(
+        summary = "Get project",
+        description = "Получить проект по его идентификатору",
+        responses = {
+            @ApiResponse(description = "Успешный ответ", responseCode="200", content =@Content(schema =@Schema(implementation = Project.class))),
+            @ApiResponse(description = "Проект не найден",responseCode="404", content =@Content(schema =@Schema(implementation = Void.class))),
+            @ApiResponse(description = "Внутренняя ошибка",responseCode="500", content =@Content(schema =@Schema(implementation = Void.class)))       
+        }
+
+    )
     @GetMapping("/{id}")
-    public ResponseEntity<Project> getProject(@PathVariable Long id){
+    public ResponseEntity<Project> getProject(@PathVariable @Parameter(description = "Идентификатор проекта") Long id){
         Optional<Project> project =  pService.findById(id);
         if(project.isPresent()){
             //return ResponseEntity.ok().body(ts.get());
