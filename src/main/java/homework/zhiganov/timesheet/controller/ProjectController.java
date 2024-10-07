@@ -54,11 +54,30 @@ public class ProjectController {
     }
 
     @GetMapping
+    @Operation(
+        summary = "Get all project",
+        description = "Получить все проекты",
+        responses = {
+            @ApiResponse(description = "Успешный ответ", responseCode="200", content =@Content(schema =@Schema(implementation = Project.class))),
+            @ApiResponse(description = "Проекты не найдены",responseCode="404", content =@Content(schema =@Schema(implementation = Void.class))),
+            @ApiResponse(description = "Внутренняя ошибка",responseCode="500", content =@Content(schema =@Schema(implementation = Void.class)))       
+        }
+
+    )
     public ResponseEntity<List<Project>> getAll(){
         return ResponseEntity.ok(pService.findAll());
     }
 
     @PostMapping
+    @Operation(
+        summary = "Create project",
+        description = "Создать проект",
+        responses = {
+            @ApiResponse(description = "Успешный ответ", responseCode="200", content =@Content(schema =@Schema(implementation = Project.class))),
+            @ApiResponse(description = "Внутренняя ошибка",responseCode="500", content =@Content(schema =@Schema(implementation = Void.class)))       
+        }
+
+    )
     public ResponseEntity<Project> create(@RequestBody Project project){
     pService.create(project);
         
@@ -66,6 +85,16 @@ public class ProjectController {
     }
 
     @DeleteMapping("{id}")
+    @Operation(
+        summary = "Delete project",
+        description = "Удалить проект",
+        responses = {
+            @ApiResponse(description = "Успешный ответ", responseCode="200", content =@Content(schema =@Schema(implementation = Project.class))),
+            @ApiResponse(description = "Проект не найден",responseCode="404", content =@Content(schema =@Schema(implementation = Void.class))),
+            @ApiResponse(description = "Внутренняя ошибка",responseCode="500", content =@Content(schema =@Schema(implementation = Void.class)))       
+        }
+
+    )
     public ResponseEntity<Void> delete(@PathVariable Long id){
         pService.delete(id);
         return ResponseEntity.noContent().build();
@@ -73,6 +102,16 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}/timesheets")
+    @Operation(
+        summary = "Get timesheets by project",
+        description = "Получить таймшиты  по проеку",
+        responses = {
+            @ApiResponse(description = "Успешный ответ", responseCode="200", content =@Content(schema =@Schema(implementation = Project.class))),
+            @ApiResponse(description = "Проект не найден",responseCode="404", content =@Content(schema =@Schema(implementation = Void.class))),
+            @ApiResponse(description = "Внутренняя ошибка",responseCode="500", content =@Content(schema =@Schema(implementation = Void.class)))       
+        }
+
+    )
     public ResponseEntity<List<Timesheet>> getTimesheetsByProjectId(@PathVariable Long id){
 
         ResponseEntity<Project> project =getProject(id);
