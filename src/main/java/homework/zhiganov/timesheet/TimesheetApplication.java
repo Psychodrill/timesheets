@@ -2,22 +2,35 @@ package homework.zhiganov.timesheet;
 
 import java.time.LocalDate;
 import java.util.concurrent.ThreadLocalRandom;
-
+import java.util.*;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import homework.zhiganov.timesheet.model.Project;
-import homework.zhiganov.timesheet.model.Timesheet;
-import homework.zhiganov.timesheet.repository.ProjectRepository;
-import homework.zhiganov.timesheet.repository.TimesheetRepository;
+import homework.zhiganov.timesheet.model.*;
+
+import homework.zhiganov.timesheet.repository.*;
+
 
 @SpringBootApplication
 public class TimesheetApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx = SpringApplication.run(TimesheetApplication.class, args);
+
+		UserRepository userRepository = ctx.getBean(UserRepository.class);
+		User admin = new User();
+		
+		admin.setLogin("admin");
+		admin.setPassword("hashed_admin-password");
+		//userRepository.save(user);
+		User user = new User();
+		
+		user.setLogin("user");
+		user.setPassword("hashed_user-password");
+		userRepository.saveAll(List.of(user, admin));
+		
 
 		ProjectRepository projectRepo =ctx.getBean(ProjectRepository.class);
 		for(int i=1; i<=5; i++){
