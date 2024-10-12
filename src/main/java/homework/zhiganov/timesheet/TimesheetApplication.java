@@ -22,15 +22,39 @@ public class TimesheetApplication {
 		UserRepository userRepository = ctx.getBean(UserRepository.class);
 		User admin = new User();
 		
-		admin.setLogin("admin");
-		admin.setPassword("hashed_admin-password");
+		admin.setLogin("admin"); //password
+		admin.setPassword("$2a$12$u0k3hBdN9FXhWEMtEReeTeWthvm5H43x4VFQ63WX/hujLFqIQ7806");
 		//userRepository.save(user);
 		User user = new User();
 		
-		user.setLogin("user");
-		user.setPassword("hashed_user-password");
-		userRepository.saveAll(List.of(user, admin));
+		user.setLogin("user");//userpassword
+		user.setPassword("$2a$12$3dTtNyX485tjPJZp.I7yAeBVytb8wlYfiAXO9z7OADKmFSwcuvuzu");
+
+
+		User anonymous = new User();
+		anonymous.setLogin("anon");//anonp
+		anonymous.setPassword("$2a$12$UJJTOkYNimQEOJJHI60PPOoKaqog4IFr2gpfBzzZGoIp43mqRi5c.");
+		userRepository.save(admin);
+		userRepository.save(user);
+		userRepository.save(anonymous);
 		
+		UserRoleRepository userRoleRepository= ctx.getBean(UserRoleRepository.class);
+		UserRole adminAdminRole = new UserRole();
+		adminAdminRole.setUserId(admin.getId());
+		adminAdminRole.setRoleName(Role.ADMIN.getName());
+		userRoleRepository.save(adminAdminRole);
+
+		
+		UserRole adminUserRole = new UserRole();
+		adminUserRole.setUserId(admin.getId());
+		adminUserRole.setRoleName(Role.USER.getName());
+		userRoleRepository.save(adminUserRole);
+
+		UserRole userUserRole = new UserRole();
+		userUserRole.setUserId(admin.getId());
+		userUserRole.setRoleName(Role.USER.getName());
+		userRoleRepository.save(userUserRole);
+
 
 		ProjectRepository projectRepo =ctx.getBean(ProjectRepository.class);
 		for(int i=1; i<=5; i++){

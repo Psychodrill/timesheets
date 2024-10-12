@@ -26,12 +26,13 @@ public class MyCustomUserDetailsService implements UserDetailsService{
         User user = userRepository.findByLogin(username)
             .orElseThrow(()-> new UsernameNotFoundException("User not found"));
         
-        List<String> userRoles=userRoleRepository.findUserRolesByUserId(user.getId());
-        List<SimpleGrantedAuthority> roles= userRoles.stream().map(SimpleGrantedAuthority::new).toList();
+        List<SimpleGrantedAuthority> userRoles=userRoleRepository.findByUserId(user.getId()).stream().map(it->new SimpleGrantedAuthority(it.getRoleName())).toList();
+        //List<SimpleGrantedAuthority> roles= userRoles.stream().map(SimpleGrantedAuthority::new).toList();
         
         //todo 
-        return new org.springframework.security.core.userdetails.User(user.getLogin(),user.getPassword(),roles);
+        //return new org.springframework.security.core.userdetails.User(user.getLogin(),user.getPassword(),roles);
         //return null;
+        return new org.springframework.security.core.userdetails.User(user.getLogin(),user.getPassword(), userRoles);
     }
 
 }

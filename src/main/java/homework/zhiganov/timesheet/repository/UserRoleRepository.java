@@ -11,7 +11,9 @@ import java.util.*;
 public interface UserRoleRepository extends JpaRepository<UserRole, Long>{
     
     
-    @Query(nativeQuery=true, value="select role_name from users_roles ur where ur.user_id=:userId")
-    List<String> findUserRolesByUserId(Long id);
+    //@Query(nativeQuery=true, value="select role_name from users_roles ur where ur.user_id=:userId")
+    //List<String> findUserRolesByUserId(Long id);
+    //List<String> findRoleNameByUserId(Long id);
+    List<UserRole> findByUserId(Long id);
 
 }
