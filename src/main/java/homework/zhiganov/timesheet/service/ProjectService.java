@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 import homework.zhiganov.timesheet.model.*;
 
 import homework.zhiganov.timesheet.repository.*;
-import homework.zhiganov.timesheet.repository.ProjectRepository;
-import homework.zhiganov.timesheet.repository.TimesheetRepository;
+
 
 
 @Service

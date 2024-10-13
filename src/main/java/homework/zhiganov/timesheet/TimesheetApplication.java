@@ -32,28 +32,48 @@ public class TimesheetApplication {
 
 
 		User anonymous = new User();
-		anonymous.setLogin("anon");//anonp
-		anonymous.setPassword("$2a$12$UJJTOkYNimQEOJJHI60PPOoKaqog4IFr2gpfBzzZGoIp43mqRi5c.");
+		anonymous.setLogin("anon");//anonpas
+		anonymous.setPassword("$2a$12$FDLBm0gFuOK6n.IQ8kfYE.BdIEy5kKgMNDkb0VJg/CbYbM.nxdpHu");
 		userRepository.save(admin);
 		userRepository.save(user);
 		userRepository.save(anonymous);
 		
+		RoleRepository roleRepository= ctx.getBean(RoleRepository.class);
+		Role roleAdmin = new Role();
+		//role.setUserId(admin.getId());
+		roleAdmin.setName("ADMIN");
+		roleRepository.save(roleAdmin);
+		Role roleUser = new Role();
+		//role.setUserId(admin.getId());
+		roleUser.setName("USER");
+		roleRepository.save(roleUser);
+		Role roleRest = new Role();
+		//role.setUserId(admin.getId());
+		roleRest.setName("REST");
+		roleRepository.save(roleRest);
+
+
 		UserRoleRepository userRoleRepository= ctx.getBean(UserRoleRepository.class);
 		UserRole adminAdminRole = new UserRole();
 		adminAdminRole.setUserId(admin.getId());
-		adminAdminRole.setRoleName(Role.ADMIN.getName());
+		adminAdminRole.setRoleId(roleAdmin.getId());
 		userRoleRepository.save(adminAdminRole);
 
 		
 		UserRole adminUserRole = new UserRole();
 		adminUserRole.setUserId(admin.getId());
-		adminUserRole.setRoleName(Role.USER.getName());
+		adminUserRole.setRoleId(roleUser.getId());
 		userRoleRepository.save(adminUserRole);
 
 		UserRole userUserRole = new UserRole();
-		userUserRole.setUserId(admin.getId());
-		userUserRole.setRoleName(Role.USER.getName());
+		userUserRole.setUserId(user.getId());
+		userUserRole.setRoleId(roleUser.getId());
 		userRoleRepository.save(userUserRole);
+
+		UserRole anonRestRole = new UserRole();
+		anonRestRole.setUserId(anonymous.getId());
+		anonRestRole.setRoleId(roleRest.getId());
+		userRoleRepository.save(anonRestRole);
 
 
 		ProjectRepository projectRepo =ctx.getBean(ProjectRepository.class);
@@ -76,6 +96,7 @@ public class TimesheetApplication {
 			timesheet.setMinutes(ThreadLocalRandom.current().nextInt(100,1000));
 			tsr.save(timesheet);
 		}
+		
 	}
 
 }

@@ -25,10 +25,13 @@ public class SecurityConfiguration {
 
         return http
                 .authorizeHttpRequests(requests->requests
-                .requestMatchers("/home/projects/**").hasAuthority(Role.ADMIN.getName())
+               
+                .requestMatchers("/home/projects/**").hasAuthority("ADMIN")
                 //.requestMatchers("/home/projects/**").hasRole(Role.ADMIN.getName()) //MY_ROLE_PREFIX
-                .requestMatchers("/home/timesheet/**").hasAnyAuthority(Role.ADMIN.getName(), Role.USER.getName())
-                .anyRequest().authenticated()
+                .requestMatchers("/home/timesheet/**").hasAnyAuthority("USER","ADMIN")
+                .requestMatchers("/timesheets").hasAnyAuthority("REST","ADMIN")
+                .requestMatchers("/projects").hasAnyAuthority("REST","ADMIN")
+                //.anyRequest().authenticated()
                                         )
                 .formLogin(Customizer.withDefaults())
                 .build();   
