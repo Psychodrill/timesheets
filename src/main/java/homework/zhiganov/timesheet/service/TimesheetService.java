@@ -6,6 +6,7 @@ import java.util.*;
 
 import org.springframework.stereotype.*;
 
+import homework.zhiganov.timesheet.aspect.Timer;
 import homework.zhiganov.timesheet.model.*;
 
 import homework.zhiganov.timesheet.repository.*;
@@ -22,6 +23,7 @@ public class TimesheetService {
         this.pRepository= pRepository;
     }
 
+    @Timer
     public Optional<Timesheet> findById(Long id){
         return tsRepository.findById(id);
 
@@ -51,7 +53,7 @@ public class TimesheetService {
 
     }
 
-
+    @Timer
     public void delete(Long id){
         tsRepository.deleteById(id);
 
