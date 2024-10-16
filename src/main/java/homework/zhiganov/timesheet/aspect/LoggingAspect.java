@@ -1,6 +1,6 @@
 package homework.zhiganov.timesheet.aspect;
 
-import java.util.Optional;
+import java.util.*;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -32,9 +32,12 @@ public class LoggingAspect {
     
     @Before(value="timesheetServiceMethodsPointcut()")//Pointcut - точка входа в аспект
     public void beforeTimesheetServiceFindById(JoinPoint jp){
-        String methodName = jp.getSignature().getName();
+        
+        //String methodName = jp.getSignature().getName();
+        Object[] arr =jp.getArgs();
+        arr[0].getClass();
        // Long id = (Long) jp.getArgs()[0];
-        log.info("Before -> TimesheetService#{}", methodName);
+        log.info("Before -> TimesheetService#{} = {}", arr[0].getClass(), arr[0]);
 
     }
 
@@ -49,10 +52,7 @@ public class LoggingAspect {
     @Around(value="timesheetServiceMethodsPointcut()")//Pointcut - точка входа в аспект
     public Object aroundTimesheetServiceFindById(ProceedingJoinPoint pjp)throws Throwable{
 
-        // Timesheet ts = new Timesheet();
-        // ts.setId(-100L);
-        // return Optional.of(ts);
-        
+        log.info("Around -> TimesheetService#{} ={}",List.of(pjp.getArgs().getClass()) , List.of(pjp.getArgs()));
         return  pjp.proceed();
 
     }
