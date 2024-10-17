@@ -11,6 +11,11 @@
 	<groupId>homework.zhiganov</groupId>
 	<artifactId>timesheet</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>timesheet-rest</module>
+		<module>timesheet-page</module>
+	</modules>
 	<name>timesheet</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
