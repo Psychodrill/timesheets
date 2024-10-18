@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 
 @Controller
-@RequestMapping("/home/timesheets")
+@RequestMapping("/timesheets")
 @RequiredArgsConstructor
 public class TimesheetPageController {
 

@@ -15,7 +15,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class TimesheetPageApplication {
 
 	public static void main(String[] args) {
-		
+		SpringApplication.run(TimesheetPageApplication.class,args);
 		
 	}
 

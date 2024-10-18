@@ -16,6 +16,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfiguration {
 
+    @Bean
+    SecurityFilterChain noSecurity (HttpSecurity http) throws Exception{
+        return http
+            .csrf(AbstractHttpConfigurer::disable)
+            .authorizeHttpRequests(it->it.anyRequest().permitAll())
+            .build();
+    }
+
     // @Bean
     // GrantedAuthorityDefaults grantedAuthorityDefaults(){
     //     return new GrantedAuthorityDefaults("MY_ROLE_PREFIX");

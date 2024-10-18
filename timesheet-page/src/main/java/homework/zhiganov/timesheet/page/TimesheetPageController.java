@@ -8,16 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import homework.zhiganov.timesheet.model.Project;
-import homework.zhiganov.timesheet.model.Timesheet;
-import homework.zhiganov.timesheet.service.ProjectService;
+//import homework.zhiganov.timesheet.model.Project;
+//import homework.zhiganov.timesheet.model.Timesheet;
+//import homework.zhiganov.timesheet.service.ProjectService;
 import homework.zhiganov.timesheet.service.TimesheetPageService;
-import homework.zhiganov.timesheet.service.TimesheetService;
+//import homework.zhiganov.timesheet.service.TimesheetService;
 import lombok.RequiredArgsConstructor;
 
 
 @Controller
-@RequestMapping("/home/timesheets")
+@RequestMapping("/timesheets")
 @RequiredArgsConstructor
 public class TimesheetPageController {
 
