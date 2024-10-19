@@ -15,6 +15,7 @@
 	<modules>
 		<module>timesheet-rest</module>
 		<module>timesheet-page</module>
+		<module>eureka-server</module>
 	</modules>
 	<name>timesheet</name>
 	<description>Demo project for Spring Boot</description>
@@ -76,6 +77,18 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 	</dependencies>
+
+
+	<dependencyManagement>
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>2023.0.3</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencyManagement>
 
 	<build>
 		<plugins>

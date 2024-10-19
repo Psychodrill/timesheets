@@ -3,7 +3,7 @@ server:
   port: 8080
 spring:
   application:
-    name: timesheet
+    name: timesheet-rest
   datasource:
     url: jdbc:h2:mem:test
     username: sa
@@ -11,5 +11,9 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     show-sql: true
-#    hibernate:
-#      ddl-auto: validate
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    preferIpAddress: true
