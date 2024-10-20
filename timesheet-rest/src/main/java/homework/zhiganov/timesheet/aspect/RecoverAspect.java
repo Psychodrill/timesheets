@@ -36,8 +36,8 @@ public class RecoverAspect {
             log.info("Recovering {} after Exception {} with message {}", pjp.getSignature().getName(), ex.getClass(), ex.getMessage());
         }
         finally{
-            Class<? extends Object> clazz =pjp.getSignature().getClass();
-            if(clazz.isInstance(clazz)){
+            //Class<? extends Object> clazz =pjp.getSignature().getClass();
+            if(!pjp.getSignature().getClass().isPrimitive()){
                 return null;
             }else{
                 return 0;

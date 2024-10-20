@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
@@ -47,6 +48,46 @@ public class TimesheetPageService {
         }
 
     }
+
+//     public List<TimesheetPageDTO> findAll() {
+//         List<TimesheetResponse> timesheets = null;
+//         int attempts = 5;
+//         while (attempts-- > 0) {
+//         try {
+//             timesheets = restClient.get()
+//             .uri("/timesheets")
+//             .retrieve()
+//             .body(new ParameterizedTypeReference<List<TimesheetResponse>>() {
+//             });
+//             break;
+//         } catch (HttpServerErrorException e) {
+//             // ignore
+//         }
+//         }
+//         if (timesheets == null) {
+//         throw new RuntimeException("oops");
+//         }
+
+//         List<TimesheetPageDTO> result = new ArrayList<>();
+//         for (TimesheetResponse timesheet : timesheets) {
+//             TimesheetPageDTO timesheetPageDto = new TimesheetPageDTO();
+//             timesheetPageDto.setId(String.valueOf(timesheet.getId()));
+//             timesheetPageDto.setMinutes(String.valueOf(timesheet.getMinutes()));
+//             timesheetPageDto.setCreatedAt(timesheet.getCreatedAt().format(DateTimeFormatter.ISO_DATE));
+
+//             ProjectResponse project = restClient.get()
+//                 .uri("/projects/" + timesheet.getProjectId())
+//                 .retrieve()
+//                 .body(ProjectResponse.class);
+//             timesheetPageDto.setProjectName(project.getName());
+
+//         result.add(timesheetPageDto);
+//     }
+
+//     return result;
+//   }
+
+
     public List<TimesheetPageDTO> findAll() {
         List<TimesheetResponse> timesheets = restClient.get()
                 .uri("/timesheets")

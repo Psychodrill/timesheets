@@ -53,17 +53,17 @@ public class TimesheetController {
         return ResponseEntity.notFound().build();
 
     }
-    // @Operation(
-    //     summary = "Get all timesheets",
-    //     description = "Получить все таймшиты",
-    //     responses = {
-    //         @ApiResponse(description = "Успешный ответ", responseCode="200", content =@Content(schema =@Schema(implementation = Project.class))),
-    //         @ApiResponse(description = "Таймшиты не найдены",responseCode="404", content =@Content(schema =@Schema(implementation = Void.class))),
-    //         @ApiResponse(description = "Внутренняя ошибка",responseCode="500", content =@Content(schema =@Schema(implementation = Void.class)))       
-    //     }
+    @Operation(
+        summary = "Get all timesheets",
+        description = "Получить все таймшиты",
+        responses = {
+            @ApiResponse(description = "Успешный ответ", responseCode="200", content =@Content(schema =@Schema(implementation = Project.class))),
+            @ApiResponse(description = "Таймшиты не найдены",responseCode="404", content =@Content(schema =@Schema(implementation = Void.class))),
+            @ApiResponse(description = "Внутренняя ошибка",responseCode="500", content =@Content(schema =@Schema(implementation = Void.class)))       
+        }
 
-    // )
-    @GetMapping
+    )
+    @GetMapping("")
     public ResponseEntity<List<Timesheet>> getAll(){
         return ResponseEntity.ok(service.findAll());
     }
