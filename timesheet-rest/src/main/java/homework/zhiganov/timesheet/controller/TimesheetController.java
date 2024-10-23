@@ -63,7 +63,7 @@ public class TimesheetController {
         }
 
     )
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<List<Timesheet>> getAll(){
         return ResponseEntity.ok(service.findAll());
     }
