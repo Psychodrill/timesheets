@@ -60,6 +60,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		<groupId>homework.zhiganov</groupId>
+		<artifactId>logging-starter</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

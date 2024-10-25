@@ -5,6 +5,7 @@ import java.util.*;
 
 import org.springframework.stereotype.Service;
 
+import homework.zhiganov.aspect.logging.Logging;
 import homework.zhiganov.timesheet.model.*;
 
 import homework.zhiganov.timesheet.repository.*;
@@ -21,7 +22,7 @@ public class ProjectService {
          this.pRepository=pRepository;
          this.tsRepository=tsRepository;
      }
-
+     @Logging
     public Optional<Project> findById(Long id){
         return pRepository.findById(id);
 

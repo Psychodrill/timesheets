@@ -16,6 +16,7 @@
 		<module>timesheet-rest</module>
 		<module>timesheet-page</module>
 		<module>eureka-server</module>
+		<module>logging-starter</module>
 	</modules>
 	<name>timesheet</name>
 	<description>Demo project for Spring Boot</description>
@@ -78,7 +79,7 @@
 		</dependency>
 	</dependencies>
 
-
+ 
 	<dependencyManagement>
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
         <dependency>
