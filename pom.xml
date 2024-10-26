@@ -17,6 +17,8 @@
 		<module>timesheet-page</module>
 		<module>eureka-server</module>
 		<module>logging-starter</module>
+		<module>recover-logging</module>
+		<module>recover-starter</module>
 	</modules>
 	<name>timesheet</name>
 	<description>Demo project for Spring Boot</description>

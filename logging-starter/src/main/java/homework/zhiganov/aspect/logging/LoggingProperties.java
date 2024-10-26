@@ -10,5 +10,6 @@ import lombok.Data;
 public class LoggingProperties {
 
     private Level level= Level.DEBUG;// default level value
+    private Boolean printArgs = false; //default value
 
 }

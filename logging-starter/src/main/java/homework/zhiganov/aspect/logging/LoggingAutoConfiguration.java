@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 public class LoggingAutoConfiguration {
 
     @Bean
-    public LoggingAspect loggingAspect(LoggingProperties properties){
-        return new LoggingAspect(properties);
+    public LoggingAspect loggingAspect(LoggingProperties properties, Boolean printArgs){
+        return new LoggingAspect(properties, printArgs);
     }
 
 }

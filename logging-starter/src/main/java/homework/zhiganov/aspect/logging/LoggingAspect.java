@@ -55,27 +55,37 @@ public class LoggingAspect {
     // }
 
     private final LoggingProperties properties;
+    private final Boolean printArgs; 
 
-    @Pointcut("@annotation(homework.zhiganov.timesheet.aspect.Logging)")
+    @Pointcut("@annotation(homework.zhiganov.aspect.logging.Logging)")
     public void loggingMethodsPointcut(){
 
     }
-    @Pointcut("@within(homework.zhiganov.timesheet.aspect.Logging)")
+    @Pointcut("@within(homework.zhiganov.aspect.logging.Logging)")
     public void loggingTypePointcut(){
 
     }
     @Around(value="loggingMethodsPointcut() || loggingTypePointcut()")//Pointcut - точка входа в аспект
     public Object loggingMethod(ProceedingJoinPoint pjp)throws Throwable{
 
+
         String methodName = pjp.getSignature().getName();
-        log.atLevel(properties.getLevel()).log("Before -> TimesheetService#{}", methodName);
+        String className = pjp.getClass().getName();
+        printMessage("Before", className, methodName);
         try{
             return pjp.proceed();
         }
         finally{
-            log.atLevel(properties.getLevel()).log("After -> TimesheetService#{}", methodName);
+            printMessage("After", className, methodName);
         }
 
-     }
+    }
 
+    private void printMessage(String prefix, String className, String methodName){
+
+        if(printArgs){
+            log.atLevel(properties.getLevel()).log("{}-> {}#{}",prefix, className, methodName);
+        }
+        
+    }
 }
